@@ -619,16 +619,19 @@ body.light-mode .quiz-item {
   visibility: visible !important;
 }
 
-/* Ensure all paragraph text in quiz has full opacity */
-.quiz p {
+/* FORCE ALL QUIZ CONTENT VISIBLE - NUCLEAR OPTION */
+.quiz,
+.quiz *,
+#knowledge-check .content,
+#knowledge-check .content *,
+#knowledge-check .quiz,
+#knowledge-check .quiz * {
   opacity: 1 !important;
   visibility: visible !important;
-}
-
-.quiz span {
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: inline !important;
+  display: block !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 .quiz-options input[type="radio"] {
