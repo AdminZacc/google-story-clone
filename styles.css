@@ -584,6 +584,14 @@ body.light-mode .quiz-item {
   transition: background 0.2s ease;
 }
 
+.quiz-options input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
 .quiz-options label:hover {
   background: rgba(216, 178, 94, 0.12);
 }
