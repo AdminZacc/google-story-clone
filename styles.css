@@ -103,7 +103,7 @@ body.light-mode .header {
 
 .header h1 {
   color: var(--accent);
-  font-size: 1.6rem;var(--accent) 0%, var(--accent-light)
+  font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: -0.3px;
   flex: 1;
