@@ -581,6 +581,9 @@ body.light-mode .content {
   height: auto !important;
   overflow: visible !important;
   pointer-events: auto !important;
+  width: 100% !important;
+  min-height: 80px !important;
+  clear: both !important;
 }
 
 body.light-mode .quiz-item {
@@ -620,6 +623,12 @@ body.light-mode .quiz-item {
 .quiz p {
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+.quiz span {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline !important;
 }
 
 .quiz-options input[type="radio"] {
@@ -666,6 +675,12 @@ body.light-mode .quiz-item {
   animation: none !important;
   visibility: visible !important;
   transform: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
 }
 
 #knowledge-check .quiz {
@@ -674,6 +689,10 @@ body.light-mode .quiz-item {
   visibility: visible !important;
   max-height: none !important;
   height: auto !important;
+  width: 100% !important;
+  min-height: 100px !important;
+  overflow: visible !important;
+  gap: 1.25rem !important;
 }
 
 #knowledge-check .quiz-item {
