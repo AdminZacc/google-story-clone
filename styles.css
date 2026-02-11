@@ -666,11 +666,26 @@ body.light-mode .quiz-item {
   flex-direction: column;
   opacity: 1 !important;
   animation: none !important;
+  visibility: visible !important;
 }
 
 #knowledge-check .content-text {
   opacity: 1 !important;
   animation: none !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+#knowledge-check .quiz {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: grid !important;
+}
+
+#knowledge-check .quiz-item {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
 }
 
 #knowledge-check .content-image {

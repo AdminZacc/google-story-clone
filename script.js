@@ -163,6 +163,12 @@ document.addEventListener("DOMContentLoaded", () => {
     contentText.appendChild(button);
   });
 
+  // Force knowledge-check section to be visible
+  const knowledgeCheckContent = document.querySelector("#knowledge-check .content");
+  if (knowledgeCheckContent) {
+    knowledgeCheckContent.classList.add("visible");
+  }
+
   // Knowledge check quiz
   const quizContainer = document.querySelector(".quiz");
   const quizItemsData = [
