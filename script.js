@@ -89,6 +89,77 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Add text-to-speech buttons per section
+  const synth = window.speechSynthesis;
+  let activeUtterance = null;
+  let activeButton = null;
+
+  const stopSpeech = () => {
+    if (synth && (synth.speaking || synth.pending)) {
+      synth.cancel();
+    }
+    if (activeButton) {
+      activeButton.classList.remove("is-playing");
+      activeButton.setAttribute("aria-pressed", "false");
+      activeButton.textContent = "Listen";
+    }
+    activeButton = null;
+    activeUtterance = null;
+  };
+
+  const getSectionText = (section) => {
+    const paragraphs = section.querySelectorAll(".content-text p");
+    return Array.from(paragraphs)
+      .map((p) => p.textContent.trim())
+      .filter(Boolean)
+      .join(" ");
+  };
+
+  document.querySelectorAll(".story-section").forEach((section) => {
+    const contentText = section.querySelector(".content-text");
+    if (!contentText) return;
+
+    const name = section.querySelector("h2")?.textContent?.trim() || "this section";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "audio-btn";
+    button.textContent = "Listen";
+    button.setAttribute("aria-pressed", "false");
+    button.setAttribute("aria-label", `Play audio for ${name}`);
+
+    if (!synth || typeof SpeechSynthesisUtterance === "undefined") {
+      button.disabled = true;
+      button.textContent = "Audio unavailable";
+      button.setAttribute("aria-label", `Audio unavailable for ${name}`);
+    } else {
+      button.addEventListener("click", () => {
+        const isPlaying = button.classList.contains("is-playing");
+        if (isPlaying) {
+          stopSpeech();
+          return;
+        }
+
+        stopSpeech();
+
+        const text = getSectionText(section);
+        if (!text) return;
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.onend = () => stopSpeech();
+        utterance.onerror = () => stopSpeech();
+
+        activeUtterance = utterance;
+        activeButton = button;
+        button.classList.add("is-playing");
+        button.setAttribute("aria-pressed", "true");
+        button.textContent = "Stop";
+        synth.speak(utterance);
+      });
+    }
+
+    contentText.appendChild(button);
+  });
+
   // Progressive enhancement: lazy-load inline images
   document.querySelectorAll("img").forEach((img) => {
     if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");

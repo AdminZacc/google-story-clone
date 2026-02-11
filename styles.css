@@ -500,6 +500,35 @@ body.light-mode .content {
   transition: color 0.3s ease;
 }
 
+.audio-btn {
+  margin-top: 1rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(216, 178, 94, 0.6);
+  background: rgba(216, 178, 94, 0.12);
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.audio-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(216, 178, 94, 0.2);
+}
+
+.audio-btn.is-playing {
+  background: rgba(216, 178, 94, 0.35);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.audio-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .nav {
   display: flex;
   flex-direction: row;
