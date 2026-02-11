@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Knowledge check quiz
   const quizContainer = document.querySelector(".quiz");
-  const quizItems = [
+  const quizItemsData = [
     {
       question: "Who invented the laserphaco probe used in cataract removal?",
       options: ["Dr. Patricia Bath", "Dr. Charles Drew", "Vivien Thomas"],
@@ -232,71 +232,95 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   if (quizContainer) {
-    const scoreSummary = document.createElement("div");
-    scoreSummary.className = "quiz-summary";
-    scoreSummary.setAttribute("role", "status");
-    scoreSummary.textContent = `Score: 0 / ${quizItems.length} · Answered: 0 / ${quizItems.length}`;
-    quizContainer.appendChild(scoreSummary);
+    let quizItems = Array.from(quizContainer.querySelectorAll(".quiz-item"));
+    const totalQuestions = quizItems.length || quizItemsData.length;
+
+    let scoreSummary = quizContainer.querySelector(".quiz-summary");
+    if (!scoreSummary) {
+      scoreSummary = document.createElement("div");
+      scoreSummary.className = "quiz-summary";
+      scoreSummary.setAttribute("role", "status");
+      quizContainer.prepend(scoreSummary);
+    }
+    scoreSummary.textContent = `Score: 0 / ${totalQuestions} · Answered: 0 / ${totalQuestions}`;
+
+    const renderQuiz = () => {
+      if (quizItems.length) return;
+      quizItemsData.forEach((item, index) => {
+        const quizItem = document.createElement("div");
+        quizItem.className = "quiz-item";
+        quizItem.dataset.answer = item.answer;
+        quizItem.dataset.reminder = item.reminder;
+
+        const question = document.createElement("p");
+        question.className = "quiz-question";
+        question.textContent = `${index + 1}. ${item.question}`;
+
+        const options = document.createElement("div");
+        options.className = "quiz-options";
+
+        const feedback = document.createElement("div");
+        feedback.className = "quiz-feedback";
+        feedback.setAttribute("role", "status");
+
+        item.options.forEach((option, optionIndex) => {
+          const label = document.createElement("label");
+
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = `quiz-${index}`;
+          input.value = option;
+
+          const text = document.createElement("span");
+          text.textContent = option;
+
+          label.appendChild(input);
+          label.appendChild(text);
+          options.appendChild(label);
+        });
+
+        quizItem.appendChild(question);
+        quizItem.appendChild(options);
+        quizItem.appendChild(feedback);
+        quizContainer.appendChild(quizItem);
+      });
+      quizItems = Array.from(quizContainer.querySelectorAll(".quiz-item"));
+    };
+
+    renderQuiz();
 
     const updateScore = () => {
       let correct = 0;
       let answered = 0;
-      quizItems.forEach((item, index) => {
-        const selected = document.querySelector(`input[name='quiz-${index}']:checked`);
-        if (selected && selected.value === item.answer) {
+      quizItems.forEach((item) => {
+        const answer = item.dataset.answer;
+        const selected = item.querySelector("input[type='radio']:checked");
+        if (selected && selected.value === answer) {
           correct += 1;
         }
         if (selected) {
           answered += 1;
         }
       });
-      scoreSummary.textContent = `Score: ${correct} / ${quizItems.length} · Answered: ${answered} / ${quizItems.length}`;
+      scoreSummary.textContent = `Score: ${correct} / ${totalQuestions} · Answered: ${answered} / ${totalQuestions}`;
     };
 
-    quizItems.forEach((item, index) => {
-      const quizItem = document.createElement("div");
-      quizItem.className = "quiz-item";
+    quizItems.forEach((item) => {
+      const answer = item.dataset.answer;
+      const reminder = item.dataset.reminder;
+      const feedback = item.querySelector(".quiz-feedback");
+      const inputs = item.querySelectorAll("input[type='radio']");
 
-      const question = document.createElement("p");
-      question.className = "quiz-question";
-      question.textContent = `${index + 1}. ${item.question}`;
-
-      const options = document.createElement("div");
-      options.className = "quiz-options";
-
-      const feedback = document.createElement("div");
-      feedback.className = "quiz-feedback";
-      feedback.setAttribute("role", "status");
-
-      item.options.forEach((option, optionIndex) => {
-        const id = `quiz-${index}-option-${optionIndex}`;
-        const label = document.createElement("label");
-
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = `quiz-${index}`;
-        input.id = id;
-        input.value = option;
-
-        const text = document.createElement("span");
-        text.textContent = option;
-
+      inputs.forEach((input) => {
         input.addEventListener("change", () => {
-          const isCorrect = option === item.answer;
-          feedback.innerHTML = `${isCorrect ? "Correct" : "Not quite"}. ` +
-            `<strong>Answer:</strong> ${item.answer}. ${item.reminder}`;
+          const isCorrect = input.value === answer;
+          if (feedback) {
+            feedback.innerHTML = `${isCorrect ? "Correct" : "Not quite"}. ` +
+              `<strong>Answer:</strong> ${answer}. ${reminder}`;
+          }
           updateScore();
         });
-
-        label.appendChild(input);
-        label.appendChild(text);
-        options.appendChild(label);
       });
-
-      quizItem.appendChild(question);
-      quizItem.appendChild(options);
-      quizItem.appendChild(feedback);
-      quizContainer.appendChild(quizItem);
     });
   }
 
