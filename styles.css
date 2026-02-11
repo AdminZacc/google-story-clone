@@ -674,11 +674,7 @@ body.light-mode .quiz-item {
 }
 
 #knowledge-check .content-image {
-  flex: 0 0 auto;
-  width: 200px;
-  height: 200px;
-  align-self: center;
-  margin-top: 1.5rem;
+  display: none;
 }
 
 #knowledge-check .content-image img {
