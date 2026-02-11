@@ -547,11 +547,14 @@ body.light-mode .content {
 /* ========================================================================== */
 
 .quiz {
-  display: grid;
+  display: grid !important;
   gap: 1.25rem;
   margin-top: 1.5rem;
-  opacity: 1;
-  visibility: visible;
+  opacity: 1 !important;
+  visibility: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 .quiz-summary {
@@ -561,6 +564,9 @@ body.light-mode .content {
   border: 1px solid rgba(216, 178, 94, 0.3);
   padding: 0.65rem 0.9rem;
   border-radius: 12px;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .quiz-item {
@@ -568,9 +574,13 @@ body.light-mode .content {
   border-radius: 14px;
   padding: 1rem 1.1rem;
   background: rgba(20, 23, 31, 0.6);
-  display: block;
-  opacity: 1;
-  visibility: visible;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
 }
 
 body.light-mode .quiz-item {
@@ -581,15 +591,20 @@ body.light-mode .quiz-item {
 .quiz-question {
   font-weight: 600;
   margin-bottom: 0.75rem;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .quiz-options {
-  display: grid;
+  display: grid !important;
   gap: 0.5rem;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .quiz-options label {
-  display: grid;
+  display: grid !important;
   grid-template-columns: 18px 1fr;
   align-items: start;
   gap: 0.55rem;
@@ -597,14 +612,19 @@ body.light-mode .quiz-item {
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.2s ease;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .quiz-options input[type="radio"] {
-  width: 18px;
-  height: 18px;
+  width: 18px !important;
+  height: 18px !important;
   cursor: pointer;
   margin: 0;
   accent-color: var(--accent);
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
 }
 
 .quiz-options label:hover {
@@ -615,6 +635,9 @@ body.light-mode .quiz-item {
   margin-top: 0.75rem;
   font-size: 0.95rem;
   color: var(--text-secondary);
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .quiz-feedback strong {
@@ -640,13 +663,20 @@ body.light-mode .quiz-item {
 }
 
 #knowledge-check .quiz {
+  display: grid !important;
   opacity: 1 !important;
   visibility: visible !important;
+  max-height: none !important;
+  height: auto !important;
 }
 
 #knowledge-check .quiz-item {
+  display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  pointer-events: auto !important;
 }
 
 /* ========================================================================== */
