@@ -110,28 +110,38 @@ document.addEventListener("DOMContentLoaded", () => {
     liveRegion.textContent = message;
   }
 
-  // Parallax scrolling effect
-  window.addEventListener("scroll", () => {
-    document.querySelectorAll(".story-section").forEach((section) => {
-      const scrollPosition = window.scrollY;
-      const sectionOffset = section.offsetTop;
-      const parallaxOffset = (scrollPosition - sectionOffset) * 0.5;
-      section.style.backgroundPosition = `center calc(center + ${parallaxOffset}px)`;
-    });
-    
-    // Update progress bar
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollProgress = (window.scrollY / totalHeight) * 100;
-    const progressBar = document.querySelector(".progress-bar");
-    if (progressBar) {
-      progressBar.style.width = scrollProgress + "%";
-      // Update ARIA attributes for accessibility
-      progressBar.setAttribute("aria-valuenow", Math.round(scrollProgress));
+  // Parallax + progress with requestAnimationFrame for smoothness
+  const sections = Array.from(document.querySelectorAll(".story-section"));
+  const progressBar = document.querySelector(".progress-bar");
+  let latestScroll = 0;
+  let ticking = false;
+
+  const onScroll = () => {
+    latestScroll = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollProgress = (latestScroll / totalHeight) * 100;
+
+        sections.forEach((section) => {
+          const sectionOffset = section.offsetTop;
+          const parallaxOffset = (latestScroll - sectionOffset) * 0.25;
+          section.style.backgroundPosition = `center calc(50% + ${parallaxOffset}px)`;
+        });
+
+        if (progressBar) {
+          progressBar.style.width = scrollProgress + "%";
+          progressBar.setAttribute("aria-valuenow", Math.round(scrollProgress));
+        }
+
+        updateActiveNavLink();
+        ticking = false;
+      });
+      ticking = true;
     }
-    
-    // Update active nav link
-    updateActiveNavLink();
-  });
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   // Smooth scroll on nav click with better keyboard support
   document.querySelectorAll(".nav a").forEach((link) => {
