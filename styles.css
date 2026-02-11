@@ -74,6 +74,11 @@ button:focus,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .story-section {
+    background-attachment: scroll;
+    background-position: center center !important;
+  }
 }
 
 .header {

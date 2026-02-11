@@ -45,6 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Progressive enhancement: lazy-load inline images
+  document.querySelectorAll("img").forEach((img) => {
+    if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+    img.decoding = "async";
+  });
+
   // Animation on reveal with IntersectionObserver
   const observerOptions = {
     threshold: 0.3,
@@ -113,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Parallax + progress with requestAnimationFrame for smoothness
   const sections = Array.from(document.querySelectorAll(".story-section"));
   const progressBar = document.querySelector(".progress-bar");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let latestScroll = 0;
   let ticking = false;
 
@@ -123,11 +130,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollProgress = (latestScroll / totalHeight) * 100;
 
-        sections.forEach((section) => {
-          const sectionOffset = section.offsetTop;
-          const parallaxOffset = (latestScroll - sectionOffset) * 0.25;
-          section.style.backgroundPosition = `center calc(50% + ${parallaxOffset}px)`;
-        });
+        if (!reduceMotion) {
+          sections.forEach((section) => {
+            const sectionOffset = section.offsetTop;
+            const parallaxOffset = (latestScroll - sectionOffset) * 0.25;
+            section.style.backgroundPosition = `center calc(50% + ${parallaxOffset}px)`;
+          });
+        }
 
         if (progressBar) {
           progressBar.style.width = scrollProgress + "%";
