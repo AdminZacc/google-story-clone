@@ -125,10 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     DOM.sections.forEach((section) => {
-      // Set bg image
-      const bg = section.getAttribute("data-bg");
-      if (bg) section.style.backgroundImage = `url(${bg})`;
-
       // Add listen button (skip knowledge-check)
       if (section.id === "knowledge-check") return;
 
