@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Accessibility highlights toggle
   const setA11yPanel = (open) => {
     if (!a11yToggle || !a11yPanel) return;
-    a11yPanel.hidden = !open;
+    a11yPanel.toggleAttribute("hidden", !open);
+    a11yPanel.classList.toggle("is-open", open);
     a11yToggle.setAttribute("aria-expanded", open);
     if (open) {
       a11yPanel.focus();
