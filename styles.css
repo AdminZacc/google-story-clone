@@ -81,6 +81,26 @@ body {
   text-align: left;
 }
 
+/* Alternate sides for each section */
+#section1 .content,
+#section3 .content,
+#section5 .content,
+#section7 .content,
+#section9 .content,
+#section11 .content {
+  flex-direction: row-reverse;
+}
+
+/* Keep intro and even sections with original direction */
+#intro .content,
+#section2 .content,
+#section4 .content,
+#section6 .content,
+#section8 .content,
+#section10 .content {
+  flex-direction: row;
+}
+
 .content-text {
   flex: 1;
   animation: slideInLeft 0.8s ease 0.3s forwards;
