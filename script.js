@@ -61,6 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
         setA11yPanel(false);
         a11yToggle.focus();
       }
+
+      // Global shortcut: '/' opens the accessibility highlights panel
+      const activeTag = document.activeElement?.tagName;
+      const isTextField = activeTag === "INPUT" || activeTag === "TEXTAREA" || activeTag === "SELECT";
+      if (!isTextField && e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
+        e.preventDefault();
+        setA11yPanel(true);
+      }
     });
 
     document.addEventListener("click", (e) => {

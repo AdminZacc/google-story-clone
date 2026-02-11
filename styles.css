@@ -116,6 +116,28 @@ button:focus,
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
+.a11y-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.a11y-tip {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: rgba(216, 178, 94, 0.08);
+  border: 1px solid rgba(216, 178, 94, 0.35);
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+body.light-mode .a11y-tip {
+  background: rgba(216, 178, 94, 0.16);
+  color: #3b4050;
+}
+
 .a11y-toggle:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(216, 178, 94, 0.25);

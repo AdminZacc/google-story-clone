@@ -21,7 +21,10 @@
       <span class="sun-icon">☀️</span>
       <span class="moon-icon">🌙</span>
     </button>
-    <button class="a11y-toggle" id="a11yToggle" aria-expanded="false" aria-controls="a11yPanel" data-tooltip="Show accessibility highlights and shortcuts">A11y</button>
+    <div class="a11y-toggle-group">
+      <button class="a11y-toggle" id="a11yToggle" aria-expanded="false" aria-controls="a11yPanel" data-tooltip="Show accessibility highlights and shortcuts">A11y</button>
+      <span class="a11y-tip" aria-hidden="true">Press / to open</span>
+    </div>
     <nav class="nav" aria-label="Story sections navigation" role="navigation" data-tooltip="Keyboard friendly: tab or arrow keys to move between sections">
       <a href="#intro" aria-label="Go to Introduction">Intro</a>
       <a href="#section1" aria-label="Go to story 1: Dr. Patricia Bath">1</a>
