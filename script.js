@@ -1,3 +1,35 @@
+// Theme toggle functionality
+const themeToggle = document.getElementById("themeToggle");
+const htmlElement = document.documentElement;
+const body = document.body;
+
+// Check for saved theme preference or default to dark mode
+const savedTheme = localStorage.getItem("theme") || "dark";
+if (savedTheme === "light") {
+  body.classList.add("light-mode");
+  themeToggle.setAttribute("aria-pressed", "true");
+}
+
+// Theme toggle event listener
+themeToggle.addEventListener("click", () => {
+  const isLightMode = body.classList.toggle("light-mode");
+  localStorage.setItem("theme", isLightMode ? "light" : "dark");
+  themeToggle.setAttribute("aria-pressed", isLightMode);
+  
+  // Announce theme change to screen readers
+  const themeName = isLightMode ? "light mode" : "dark mode";
+  announceToScreenReader(`Switched to ${themeName}`);
+});
+
+// Respect system preference if no saved preference
+if (!localStorage.getItem("theme")) {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (!prefersDark) {
+    body.classList.add("light-mode");
+    themeToggle.setAttribute("aria-pressed", "true");
+  }
+}
+
 // Set background images from data attributes
 document.querySelectorAll(".story-section").forEach((section) => {
   const bg = section.getAttribute("data-bg");
