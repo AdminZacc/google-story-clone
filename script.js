@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Theme toggle functionality
   const themeToggle = document.getElementById("themeToggle");
   const body = document.body;
+  const a11yToggle = document.getElementById("a11yToggle");
+  const a11yPanel = document.getElementById("a11yPanel");
   
   if (themeToggle) {
     console.log("Theme toggle found, initializing...");
@@ -35,6 +37,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } else {
     console.error("Theme toggle button not found!");
+  }
+
+  // Accessibility highlights toggle
+  const setA11yPanel = (open) => {
+    if (!a11yToggle || !a11yPanel) return;
+    a11yPanel.hidden = !open;
+    a11yToggle.setAttribute("aria-expanded", open);
+    if (open) {
+      a11yPanel.focus();
+      announceToScreenReader("Accessibility highlights opened");
+    }
+  };
+
+  if (a11yToggle && a11yPanel) {
+    a11yToggle.addEventListener("click", () => {
+      const isOpen = a11yToggle.getAttribute("aria-expanded") === "true";
+      setA11yPanel(!isOpen);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && a11yToggle.getAttribute("aria-expanded") === "true") {
+        setA11yPanel(false);
+        a11yToggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      const isOpen = a11yToggle.getAttribute("aria-expanded") === "true";
+      if (!isOpen) return;
+      if (!a11yPanel.contains(e.target) && e.target !== a11yToggle) {
+        setA11yPanel(false);
+      }
+    });
   }
 
   // Set background images from data attributes

@@ -21,6 +21,7 @@
       <span class="sun-icon">☀️</span>
       <span class="moon-icon">🌙</span>
     </button>
+    <button class="a11y-toggle" id="a11yToggle" aria-expanded="false" aria-controls="a11yPanel" data-tooltip="Show accessibility highlights and shortcuts">A11y</button>
     <nav class="nav" aria-label="Story sections navigation" role="navigation" data-tooltip="Keyboard friendly: tab or arrow keys to move between sections">
       <a href="#intro" aria-label="Go to Introduction">Intro</a>
       <a href="#section1" aria-label="Go to story 1: Dr. Patricia Bath">1</a>
@@ -37,6 +38,19 @@
     </nav>
     <div class="progress-bar" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-tooltip="Live scroll progress with aria-valuenow updates"></div>
   </header>
+
+  <section id="a11yPanel" class="a11y-panel" role="region" aria-label="Accessibility highlights" tabindex="-1" hidden>
+    <h2>Accessibility highlights</h2>
+    <ul>
+      <li>Skip link jumps directly to the story content for keyboard users.</li>
+      <li>Navigation supports arrow keys and clear focus states.</li>
+      <li>Theme toggle updates aria-pressed and remembers your preference.</li>
+      <li>Scroll progress bar exposes aria-valuenow for screen readers.</li>
+      <li>IntersectionObserver announces when sections load into view.</li>
+      <li>Prefers-reduced-motion respected; parallax and animations dial back.</li>
+      <li>Images lazy-load and decode asynchronously to improve performance.</li>
+    </ul>
+  </section>
 
   <main id="story">
 
