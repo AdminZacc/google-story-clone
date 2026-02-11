@@ -236,4 +236,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  // Post iframe height to parent for auto-resize embeds
+  const postHeight = () => {
+    if (window.parent === window) return;
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: "storyHeight", height }, "*");
+  };
+
+  postHeight();
+  window.addEventListener("load", postHeight);
+  window.addEventListener("resize", postHeight);
+
+  if ("ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(() => postHeight());
+    resizeObserver.observe(document.body);
+  }
 });
