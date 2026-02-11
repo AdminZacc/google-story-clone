@@ -116,6 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   document.querySelectorAll(".story-section").forEach((section) => {
+    // Skip listen button for knowledge check
+    if (section.id === "knowledge-check") return;
+
     const contentText = section.querySelector(".content-text");
     if (!contentText) return;
 
