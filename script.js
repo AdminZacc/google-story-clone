@@ -184,7 +184,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Force knowledge-check section visibility
     const kcContent = document.querySelector("#knowledge-check .content");
-    if (kcContent) kcContent.classList.add("visible");
+    if (kcContent) {
+      kcContent.classList.add("visible");
+      // Ensure visibility with inline styles as fallback
+      kcContent.style.opacity = "1";
+      kcContent.style.visibility = "visible";
+      // Also force the text content visible
+      const kcText = kcContent.querySelector(".content-text");
+      if (kcText) {
+        kcText.style.opacity = "1";
+        kcText.style.visibility = "visible";
+      }
+      // And the quiz
+      const kcQuiz = kcContent.querySelector(".quiz");
+      if (kcQuiz) {
+        kcQuiz.style.opacity = "1";
+        kcQuiz.style.visibility = "visible";
+      }
+    }
 
     const scoreSummary = DOM.quizContainer.querySelector(".quiz-summary");
     const totalQuestions = DOM.quizItems.length;
