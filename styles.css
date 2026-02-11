@@ -556,6 +556,9 @@ body.light-mode .content {
   border-radius: 14px;
   padding: 1rem 1.1rem;
   background: rgba(20, 23, 31, 0.6);
+  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 body.light-mode .quiz-item {
