@@ -616,6 +616,12 @@ body.light-mode .quiz-item {
   visibility: visible !important;
 }
 
+/* Ensure all paragraph text in quiz has full opacity */
+.quiz p {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 .quiz-options input[type="radio"] {
   width: 18px !important;
   height: 18px !important;
@@ -677,6 +683,12 @@ body.light-mode .quiz-item {
   max-height: none !important;
   height: auto !important;
   pointer-events: auto !important;
+}
+
+#knowledge-check .content .quiz-question {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
 }
 
 /* ========================================================================== */
