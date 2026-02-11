@@ -160,6 +160,124 @@ document.addEventListener("DOMContentLoaded", () => {
     contentText.appendChild(button);
   });
 
+  // Knowledge check quiz
+  const quizContainer = document.querySelector(".quiz");
+  const quizItems = [
+    {
+      question: "Who invented the laserphaco probe used in cataract removal?",
+      options: ["Dr. Patricia Bath", "Dr. Charles Drew", "Vivien Thomas"],
+      answer: "Dr. Patricia Bath",
+      reminder: "Dr. Patricia Bath pioneered community ophthalmology and invented the laserphaco probe."
+    },
+    {
+      question: "Which inventor improved the pacemaker control unit?",
+      options: ["Otis Boykin", "James McCune Smith", "Dr. Percy Julian"],
+      answer: "Otis Boykin",
+      reminder: "Otis Boykin patented devices that improved pacemaker reliability."
+    },
+    {
+      question: "Who helped develop the Moderna COVID-19 vaccine?",
+      options: ["Dr. Kizzmekia S. Corbett-Helaire", "Dr. Rebecca Lee Crumpler", "Dr. Joycelyn Elders"],
+      answer: "Dr. Kizzmekia S. Corbett-Helaire",
+      reminder: "Dr. Corbett-Helaire led NIH research that helped create mRNA-1273."
+    },
+    {
+      question: "Who is known as the " + '"Father of the Blood Bank"' + "?",
+      options: ["Dr. Charles Drew", "Dr. Daniel Hale Williams", "Dr. Miles V. Lynk"],
+      answer: "Dr. Charles Drew",
+      reminder: "Dr. Drew revolutionized blood plasma preservation and large-scale blood banks."
+    },
+    {
+      question: "Who was the first African American Surgeon General?",
+      options: ["Dr. Joycelyn Elders", "Dr. Rebecca Lee Crumpler", "Vivien Thomas"],
+      answer: "Dr. Joycelyn Elders",
+      reminder: "Dr. Elders served as the 15th Surgeon General and advanced public health education."
+    },
+    {
+      question: "Which physician performed early successful open-heart surgery and founded Provident Hospital?",
+      options: ["Dr. Daniel Hale Williams", "Dr. Percy Julian", "Dr. Miles V. Lynk"],
+      answer: "Dr. Daniel Hale Williams",
+      reminder: "Dr. Williams pioneered open-heart surgery and established Provident Hospital."
+    },
+    {
+      question: "Who advanced synthetic cortisone production for arthritis treatment?",
+      options: ["Dr. Percy Julian", "Otis Boykin", "Dr. Charles Drew"],
+      answer: "Dr. Percy Julian",
+      reminder: "Dr. Julian synthesized medicinal compounds that expanded access to cortisone."
+    },
+    {
+      question: "Who was the first African American woman to earn a medical degree in the U.S.?",
+      options: ["Dr. Rebecca Lee Crumpler", "Dr. Joycelyn Elders", "Dr. Patricia Bath"],
+      answer: "Dr. Rebecca Lee Crumpler",
+      reminder: "Dr. Crumpler earned her degree in 1864 and cared for women and children."
+    },
+    {
+      question: "Who was the first Black physician in the U.S. with a medical degree?",
+      options: ["James McCune Smith", "Dr. Miles V. Lynk", "Vivien Thomas"],
+      answer: "James McCune Smith",
+      reminder: "James McCune Smith earned his degree in Glasgow and practiced in New York."
+    },
+    {
+      question: "Who helped pioneer surgical techniques for congenital heart conditions?",
+      options: ["Vivien Thomas", "Dr. Kizzmekia S. Corbett-Helaire", "Dr. Daniel Hale Williams"],
+      answer: "Vivien Thomas",
+      reminder: "Vivien Thomas developed tools and techniques that advanced heart surgery."
+    },
+    {
+      question: "Who co-founded the National Medical Association and published an early Black medical journal?",
+      options: ["Dr. Miles V. Lynk", "Dr. Patricia Bath", "Dr. Charles Drew"],
+      answer: "Dr. Miles V. Lynk",
+      reminder: "Dr. Lynk launched The Medical and Surgical Observer and co-founded the NMA."
+    }
+  ];
+
+  if (quizContainer) {
+    quizItems.forEach((item, index) => {
+      const quizItem = document.createElement("div");
+      quizItem.className = "quiz-item";
+
+      const question = document.createElement("p");
+      question.className = "quiz-question";
+      question.textContent = `${index + 1}. ${item.question}`;
+
+      const options = document.createElement("div");
+      options.className = "quiz-options";
+
+      const feedback = document.createElement("div");
+      feedback.className = "quiz-feedback";
+      feedback.setAttribute("role", "status");
+
+      item.options.forEach((option, optionIndex) => {
+        const id = `quiz-${index}-option-${optionIndex}`;
+        const label = document.createElement("label");
+
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = `quiz-${index}`;
+        input.id = id;
+        input.value = option;
+
+        const text = document.createElement("span");
+        text.textContent = option;
+
+        input.addEventListener("change", () => {
+          const isCorrect = option === item.answer;
+          feedback.innerHTML = `${isCorrect ? "Correct" : "Not quite"}. ` +
+            `<strong>Answer:</strong> ${item.answer}. ${item.reminder}`;
+        });
+
+        label.appendChild(input);
+        label.appendChild(text);
+        options.appendChild(label);
+      });
+
+      quizItem.appendChild(question);
+      quizItem.appendChild(options);
+      quizItem.appendChild(feedback);
+      quizContainer.appendChild(quizItem);
+    });
+  }
+
   // Progressive enhancement: lazy-load inline images
   document.querySelectorAll("img").forEach((img) => {
     if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
