@@ -4,12 +4,54 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Segoe UI", Roboto, sans-serif;
   color: #f0e6d2;
   background: #1a1a1a;
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  line-height: 1.6;
+}
+
+/* Skip to main content link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #d4af37;
+  color: #1a1a1a;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Ensure all interactive elements have visible focus states */
+a:focus,
+button:focus,
+[role="button"]:focus {
+  outline: 3px solid #d4af37;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .header {
@@ -180,6 +222,7 @@ body {
   color: #d4af37;
   font-weight: 600;
   letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
 .content h3 {
@@ -188,12 +231,13 @@ body {
   font-weight: 400;
   color: #e8c9a8;
   opacity: 0.95;
+  line-height: 1.4;
 }
 
 .content p {
   font-size: 1.05rem;
   color: #f0e6d2;
-  line-height: 1.7;
+  line-height: 1.8;
   margin-bottom: 1rem;
   opacity: 0.9;
 }
@@ -220,6 +264,12 @@ body {
   font-weight: 500;
   font-size: 0.9rem;
   backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.nav a:focus {
+  outline: 3px solid #d4af37;
+  outline-offset: 2px;
 }
 
 .nav a:hover {
@@ -234,6 +284,7 @@ body {
   background: rgba(212, 175, 55, 0.3);
   border-color: #d4af37;
   color: #d4af37;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {

@@ -21,6 +21,8 @@ window.addEventListener("scroll", () => {
   const progressBar = document.querySelector(".progress-bar");
   if (progressBar) {
     progressBar.style.width = scrollProgress + "%";
+    // Update ARIA attributes for accessibility
+    progressBar.setAttribute("aria-valuenow", Math.round(scrollProgress));
   }
   
   // Update active nav link
@@ -37,6 +39,8 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("visible");
+      // Announce to screen readers when content comes into view
+      announceToScreenReader(`${entry.target.querySelector("h2")?.textContent || ""} section has loaded`);
     }
   });
 }, observerOptions);
@@ -66,11 +70,28 @@ function updateActiveNavLink() {
     const href = link.getAttribute("href").substring(1);
     if (href === currentSection) {
       link.classList.add("active");
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
     }
   });
 }
 
-// Smooth scroll on nav click
+// Announce messages to screen readers using aria-live
+function announceToScreenReader(message) {
+  let liveRegion = document.querySelector("[aria-live='polite']");
+  if (!liveRegion) {
+    liveRegion = document.createElement("div");
+    liveRegion.setAttribute("aria-live", "polite");
+    liveRegion.setAttribute("aria-atomic", "true");
+    liveRegion.style.position = "absolute";
+    liveRegion.style.left = "-10000px";
+    document.body.appendChild(liveRegion);
+  }
+  liveRegion.textContent = message;
+}
+
+// Smooth scroll on nav click with better keyboard support
 document.querySelectorAll(".nav a").forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -78,6 +99,35 @@ document.querySelectorAll(".nav a").forEach((link) => {
     const targetSection = document.getElementById(targetId);
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: "smooth" });
+      // Announce navigation and focus on the target
+      announceToScreenReader(`Navigated to ${link.getAttribute("aria-label")}`);
+      // Focus on the main content after scroll
+      const heading = targetSection.querySelector("h2");
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus();
+      }
     }
   });
+});
+
+// Keyboard support for arrow keys
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+    const navLinks = Array.from(document.querySelectorAll(".nav a"));
+    const activeLink = document.querySelector(".nav a.active");
+    const currentIndex = navLinks.findIndex(link => link === activeLink);
+    if (currentIndex < navLinks.length - 1) {
+      navLinks[currentIndex + 1].click();
+      navLinks[currentIndex + 1].focus();
+    }
+  } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+    const navLinks = Array.from(document.querySelectorAll(".nav a"));
+    const activeLink = document.querySelector(".nav a.active");
+    const currentIndex = navLinks.findIndex(link => link === activeLink);
+    if (currentIndex > 0) {
+      navLinks[currentIndex - 1].click();
+      navLinks[currentIndex - 1].focus();
+    }
+  }
 });
