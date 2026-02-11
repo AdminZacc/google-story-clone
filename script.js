@@ -235,18 +235,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const scoreSummary = document.createElement("div");
     scoreSummary.className = "quiz-summary";
     scoreSummary.setAttribute("role", "status");
-    scoreSummary.textContent = `Score: 0 / ${quizItems.length}`;
+    scoreSummary.textContent = `Score: 0 / ${quizItems.length} · Answered: 0 / ${quizItems.length}`;
     quizContainer.appendChild(scoreSummary);
 
     const updateScore = () => {
       let correct = 0;
+      let answered = 0;
       quizItems.forEach((item, index) => {
         const selected = document.querySelector(`input[name='quiz-${index}']:checked`);
         if (selected && selected.value === item.answer) {
           correct += 1;
         }
+        if (selected) {
+          answered += 1;
+        }
       });
-      scoreSummary.textContent = `Score: ${correct} / ${quizItems.length}`;
+      scoreSummary.textContent = `Score: ${correct} / ${quizItems.length} · Answered: ${answered} / ${quizItems.length}`;
     };
 
     quizItems.forEach((item, index) => {
