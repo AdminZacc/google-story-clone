@@ -41,7 +41,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Skip to main content link for keyboard navigation */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -60,7 +59,6 @@ body {
   outline-offset: 2px;
 }
 
-/* Ensure all interactive elements have visible focus states */
 a:focus,
 button:focus,
 [role="button"]:focus {
@@ -69,7 +67,6 @@ button:focus,
   border-radius: 4px;
 }
 
-/* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -80,7 +77,7 @@ button:focus,
 }
 
 .header {
-  padding: 1rem;
+  padding: 1rem 2rem;
   background: linear-gradient(180deg, var(--bg-secondary) 0%, rgba(42, 40, 40, 0.95) 100%);
   border-bottom: 2px solid var(--accent);
   position: sticky;
@@ -89,6 +86,10 @@ button:focus,
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
 }
 
 body.light-mode .header {
@@ -102,8 +103,8 @@ body.light-mode .header {
   font-weight: 600;
   letter-spacing: -0.3px;
   transition: color 0.3s ease;
-  margin-bottom: 1rem;
-  text-align: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .theme-toggle {
@@ -118,9 +119,7 @@ body.light-mode .header {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  position: relative;
   flex-shrink: 0;
 }
 
@@ -224,7 +223,6 @@ body.light-mode .content {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Alternate sides for each section */
 #section1 .content,
 #section3 .content,
 #section5 .content,
@@ -234,7 +232,6 @@ body.light-mode .content {
   flex-direction: row-reverse;
 }
 
-/* Keep intro and even sections with original direction */
 #intro .content,
 #section2 .content,
 #section4 .content,
@@ -345,7 +342,6 @@ body.light-mode .content {
   margin-bottom: 1rem;
   opacity: 0.9;
   transition: color 0.3s ease;
-  margin: 1rem;
 }
 
 .nav {
@@ -353,8 +349,9 @@ body.light-mode .content {
   flex-direction: row;
   gap: 0.5rem;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  flex-shrink: 0;
 }
 
 .nav a {
@@ -393,6 +390,45 @@ body.light-mode .content {
 }
 
 @media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .header h1 {
+    flex-basis: 100%;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+  }
+  
+  .nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: none;
+    gap: 0.25rem;
+    z-index: 20;
+    padding: 0.5rem;
+    background: rgba(42, 40, 40, 0.95);
+    border-radius: 0;
+    border-top: 1px solid var(--accent);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  #story {
+    padding-bottom: 4rem;
+  }
+  
+  .nav a {
+    padding: 0.35rem 0.35rem;
+    font-size: 0.65rem;
+  }
+  
   .content {
     flex-direction: column !important;
     gap: 2rem;
@@ -420,35 +456,26 @@ body.light-mode .content {
     font-size: 1rem;
   }
   
-  .header h1 {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-  
   .theme-toggle {
-    position: static;
     width: 45px;
     height: 45px;
     font-size: 1.3rem;
   }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1rem;
+  }
   
-  .nav {
-    position: fixed;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: row;
-    gap: 0.3rem;
-    z-index: 20;
-    width: calc(100% - 2rem);
-    justify-content: center;
-    padding: 0.5rem;
-    background: rgba(42, 40, 40, 0.9);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
   }
   
   .nav a {
-    padding: 0.4rem 0.4rem;
-    font-size: 0.75rem;
+    padding: 0.3rem 0.3rem;
+    font-size: 0.6rem;
   }
+}
