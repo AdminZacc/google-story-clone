@@ -22,8 +22,8 @@ body.light-mode {
   --bg-secondary: #ffffff;
   --text-primary: #1a1a1a;
   --text-secondary: #333333;
-  --accent: #c9a961;
-  --accent-light: #d4af37;
+  --accent: #8b6914;
+  --accent-light: #a87f1d;
   --overlay-light: rgba(255, 255, 255, 0.7);
   --overlay-dark: rgba(255, 255, 255, 0.5);
 }
