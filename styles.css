@@ -167,7 +167,7 @@ body.light-mode .moon-icon {
   bottom: 0;
   left: 0;
   height: 2px;
-  background: linear-gradient(90deg, #d4af37 0%, #e8c9a8 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
   width: 0%;
   transition: width 0.2s ease;
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
@@ -190,7 +190,11 @@ body.light-mode .moon-icon {
   padding: 2rem;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.6s ease, filter 0.3s ease;
+}
+
+body.light-mode .story-section {
+  filter: brightness(1.4);
 }
 
 .story-section::before {
@@ -199,6 +203,10 @@ body.light-mode .moon-icon {
   inset: 0;
   background: linear-gradient(135deg, var(--overlay-light) 0%, var(--overlay-dark) 100%);
   transition: background 0.3s ease;
+}
+
+body.light-mode .story-section::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
 }
 
 .content {
@@ -211,6 +219,11 @@ body.light-mode .moon-icon {
   gap: 3rem;
   align-items: center;
   text-align: left;
+  transition: text-shadow 0.3s ease;
+}
+
+body.light-mode .content {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Alternate sides for each section */
