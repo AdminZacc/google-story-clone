@@ -232,6 +232,23 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   if (quizContainer) {
+    const scoreSummary = document.createElement("div");
+    scoreSummary.className = "quiz-summary";
+    scoreSummary.setAttribute("role", "status");
+    scoreSummary.textContent = `Score: 0 / ${quizItems.length}`;
+    quizContainer.appendChild(scoreSummary);
+
+    const updateScore = () => {
+      let correct = 0;
+      quizItems.forEach((item, index) => {
+        const selected = document.querySelector(`input[name='quiz-${index}']:checked`);
+        if (selected && selected.value === item.answer) {
+          correct += 1;
+        }
+      });
+      scoreSummary.textContent = `Score: ${correct} / ${quizItems.length}`;
+    };
+
     quizItems.forEach((item, index) => {
       const quizItem = document.createElement("div");
       quizItem.className = "quiz-item";
@@ -264,6 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const isCorrect = option === item.answer;
           feedback.innerHTML = `${isCorrect ? "Correct" : "Not quite"}. ` +
             `<strong>Answer:</strong> ${item.answer}. ${item.reminder}`;
+          updateScore();
         });
 
         label.appendChild(input);
