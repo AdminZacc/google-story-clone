@@ -181,22 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================================================
   
   function initQuiz() {
-    if (!DOM.quizContainer || !DOM.quizItems.length) return;
+    if (!DOM.quizContainer || !DOM.quizItems.length) {
+      console.log("Quiz not found - container:", !!DOM.quizContainer, "items:", DOM.quizItems.length);
+      return;
+    }
 
-    // Force knowledge-check section to be immediately visible
-    const kcSection = document.querySelector("#knowledge-check");
-    const kcContent = document.querySelector("#knowledge-check .content");
-    
-    if (kcContent) {
-      // Add the visible class - this is the key to making content show
-      kcContent.classList.add("visible");
-    }
-    
-    if (kcSection) {
-      // Ensure the section itself is visible
-      kcSection.style.opacity = "1";
-      kcSection.style.visibility = "visible";
-    }
+    console.log("Quiz initialized with", DOM.quizItems.length, "questions");
 
     const scoreSummary = DOM.quizContainer.querySelector(".quiz-summary");
     const totalQuestions = DOM.quizItems.length;

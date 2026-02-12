@@ -640,108 +640,201 @@ body.light-mode .quiz-item {
 }
 
 /* ========================================================================== */
-/* KNOWLEDGE CHECK SPECIFIC */
+/* KNOWLEDGE CHECK - SIMPLIFIED */
 /* ========================================================================== */
 
-/* DEBUG: Make knowledge check VERY visible */
+/* Make the section visible */
 #knowledge-check {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  min-height: 100vh;
+  background: #1a1d27;
+  padding: 4rem 2rem;
 }
 
-/* Force everything in knowledge-check to be visible */
-#knowledge-check,
-#knowledge-check *,
-#knowledge-check .content,
-#knowledge-check .content *,
-#knowledge-check .content-text,
-#knowledge-check .content-text *,
-#knowledge-check .quiz,
-#knowledge-check .quiz *,
-#knowledge-check .quiz-item,
-#knowledge-check .quiz-item *,
-#knowledge-check .quiz-question,
-#knowledge-check .quiz-options,
-#knowledge-check .quiz-options *,
-#knowledge-check .quiz-summary,
-#knowledge-check .quiz-feedback,
-#knowledge-check p,
-#knowledge-check label,
-#knowledge-check span,
-#knowledge-check input {
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: revert !important;
-  max-height: none !important;
-  height: auto !important;
-  overflow: visible !important;
-}
-
+/* Content box */
 #knowledge-check .content {
-  flex-direction: column;
-  display: flex !important;
-  background: rgba(30, 30, 50, 0.95) !important;
-  border: 3px solid var(--accent) !important;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #2a2d37;
+  padding: 3rem;
+  border-radius: 16px;
+  border: 2px solid #d8b25e;
 }
 
-#knowledge-check .content-text {
-  width: 100%;
-  max-width: none;
-  display: flex !important;
-  flex-direction: column !important;
+/* Headings */
+#knowledge-check h2 {
+  color: #d8b25e;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
+#knowledge-check h3 {
+  color: #cfd6e5;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+
+#knowledge-check p {
+  color: #e9edf5;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* Quiz container */
 #knowledge-check .quiz {
-  display: grid !important;
-  background: rgba(50, 50, 70, 0.3) !important;
-  padding: 1.5rem !important;
-  border: 2px dashed var(--accent-light) !important;
+  display: block;
+  width: 100%;
 }
 
+/* Quiz summary */
+#knowledge-check .quiz-summary {
+  display: block;
+  background: #3a3d47;
+  color: #d8b25e;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  border: 1px solid #d8b25e;
+}
+
+/* Each quiz question box */
 #knowledge-check .quiz-item {
-  display: block !important;
-  background: rgba(100, 100, 120, 0.2) !important;
-  border: 1px solid var(--accent) !important;
-  margin-bottom: 1rem !important;
-  padding: 1.5rem !important;
+  display: block;
+  background: #35384a;
+  border: 1px solid #4a4d5a;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
 }
 
+/* Question text */
 #knowledge-check .quiz-question {
-  color: var(--text-primary) !important;
-  font-size: 1.1rem !important;
-  display: block !important;
-  margin-bottom: 1rem !important;
-  font-weight: 600 !important;
+  display: block;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
 }
 
+/* Options container */
 #knowledge-check .quiz-options {
-  display: grid !important;
-  gap: 0.75rem !important;
+  display: block;
 }
 
+/* Each option label */
 #knowledge-check .quiz-options label {
-  display: flex !important;
-  color: var(--text-primary) !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
-  padding: 0.75rem !important;
-  background: rgba(216, 178, 94, 0.05) !important;
-  border: 1px solid rgba(216, 178, 94, 0.15) !important;
-  border-radius: 8px !important;
-  cursor: pointer !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: #2a2d37;
+  border: 1px solid #4a4d5a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-#knowledge-check .quiz-options span {
-  color: var(--text-primary) !important;
-  display: inline !important;
-  flex: 1 !important;
+#knowledge-check .quiz-options label:hover {
+  background: #35384a;
+  border-color: #d8b25e;
 }
 
+/* Radio buttons */
 #knowledge-check .quiz-options input[type="radio"] {
-  display: inline-block !important;
-  width: 18px !important;
-  height: 18px !important;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #d8b25e;
+}
+
+/* Option text */
+#knowledge-check .quiz-options span {
+  display: inline;
+  color: #e9edf5;
+  font-size: 1rem;
+  flex: 1;
+}
+
+/* Feedback */
+#knowledge-check .quiz-feedback {
+  display: block;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #3a3d47;
+  border-left: 3px solid #d8b25e;
+  border-radius: 4px;
+  color: #cfd6e5;
+}
+
+#knowledge-check .quiz-feedback:empty {
+  display: none;
+}
+
+#knowledge-check .quiz-feedback strong {
+  color: #d8b25e;
+}
+
+/* Light mode overrides */
+body.light-mode #knowledge-check {
+  background: #f0f2f5;
+}
+
+body.light-mode #knowledge-check .content {
+  background: #ffffff;
+  border-color: #b3880f;
+}
+
+body.light-mode #knowledge-check h2 {
+  color: #b3880f;
+}
+
+body.light-mode #knowledge-check h3,
+body.light-mode #knowledge-check p {
+  color: #1a1d27;
+}
+
+body.light-mode #knowledge-check .quiz-summary {
+  background: #f7f8fb;
+  color: #b3880f;
+  border-color: #b3880f;
+}
+
+body.light-mode #knowledge-check .quiz-item {
+  background: #f7f8fb;
+  border-color: #d0d3db;
+}
+
+body.light-mode #knowledge-check .quiz-question {
+  color: #1a1d27;
+}
+
+body.light-mode #knowledge-check .quiz-options label {
+  background: #ffffff;
+  border-color: #d0d3db;
+}
+
+body.light-mode #knowledge-check .quiz-options label:hover {
+  background: #f7f8fb;
+  border-color: #b3880f;
+}
+
+body.light-mode #knowledge-check .quiz-options span {
+  color: #1a1d27;
+}
+
+body.light-mode #knowledge-check .quiz-feedback {
+  background: #f7f8fb;
+  color: #3b4050;
+  border-left-color: #b3880f;
 }
 
 /* ========================================================================== */
