@@ -392,6 +392,43 @@
       `;
       document.head.appendChild(styleEl);
       console.log('Quiz visibility styles injected');
+      
+      // Debug computed styles when DOM is ready
+      window.addEventListener('DOMContentLoaded', () => {
+        const quiz = document.querySelector('.quiz');
+        const firstItem = document.querySelector('.quiz-item');
+        const firstQuestion = document.querySelector('.quiz-question');
+        
+        if (quiz && firstItem && firstQuestion) {
+          const quizStyles = window.getComputedStyle(quiz);
+          const itemStyles = window.getComputedStyle(firstItem);
+          const questionStyles = window.getComputedStyle(firstQuestion);
+          
+          console.log('Quiz computed styles:', {
+            display: quizStyles.display,
+            opacity: quizStyles.opacity,
+            visibility: quizStyles.visibility,
+            height: quizStyles.height,
+            overflow: quizStyles.overflow
+          });
+          
+          console.log('First item computed styles:', {
+            display: itemStyles.display,
+            opacity: itemStyles.opacity,
+            visibility: itemStyles.visibility,
+            height: itemStyles.height,
+            color: itemStyles.color
+          });
+          
+          console.log('First question computed styles:', {
+            display: questionStyles.display,
+            opacity: questionStyles.opacity,
+            visibility: questionStyles.visibility,
+            fontSize: questionStyles.fontSize,
+            color: questionStyles.color
+          });
+        }
+      });
     })();
   </script>
   <script src="script.js?v=3"></script>
