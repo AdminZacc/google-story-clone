@@ -178,25 +178,19 @@ document.addEventListener("DOMContentLoaded", () => {
   function initQuiz() {
     if (!DOM.quizContainer || !DOM.quizItems.length) return;
 
-    // Force knowledge-check section visibility
+    // Force knowledge-check section to be immediately visible
+    const kcSection = document.querySelector("#knowledge-check");
     const kcContent = document.querySelector("#knowledge-check .content");
+    
     if (kcContent) {
+      // Add the visible class - this is the key to making content show
       kcContent.classList.add("visible");
-      // Ensure visibility with inline styles as fallback
-      kcContent.style.opacity = "1";
-      kcContent.style.visibility = "visible";
-      // Also force the text content visible
-      const kcText = kcContent.querySelector(".content-text");
-      if (kcText) {
-        kcText.style.opacity = "1";
-        kcText.style.visibility = "visible";
-      }
-      // And the quiz
-      const kcQuiz = kcContent.querySelector(".quiz");
-      if (kcQuiz) {
-        kcQuiz.style.opacity = "1";
-        kcQuiz.style.visibility = "visible";
-      }
+    }
+    
+    if (kcSection) {
+      // Ensure the section itself is visible
+      kcSection.style.opacity = "1";
+      kcSection.style.visibility = "visible";
     }
 
     const scoreSummary = DOM.quizContainer.querySelector(".quiz-summary");
