@@ -167,66 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================================================
-  // QUIZ INITIALIZATION
-  // ============================================================================
-
-  function initQuiz() {
-    const quizContainer = document.querySelector(".quiz");
-    if (!quizContainer) return;
-
-    const quizItems = Array.from(document.querySelectorAll(".quiz-item"));
-    const submitBtn = quizContainer.querySelector(".quiz-submit");
-    const scoreDisplay = quizContainer.querySelector(".quiz-score");
-    const scoreValue = quizContainer.querySelector(".score-value");
-
-    // Add change listeners to all radio buttons
-    quizItems.forEach((item) => {
-      const radios = item.querySelectorAll("input[type='radio']");
-      radios.forEach((radio) => {
-        radio.addEventListener("change", () => {
-          const answer = item.dataset.answer;
-          const selected = item.querySelector("input[type='radio']:checked");
-          const feedback = item.querySelector(".quiz-feedback");
-
-          if (selected && feedback) {
-            const isCorrect = selected.value === answer;
-            feedback.textContent = isCorrect
-              ? "✓ Correct answer!"
-              : "✗ Incorrect. Try again or check another answer.";
-            feedback.className = `quiz-feedback ${isCorrect ? "correct" : "incorrect"}`;
-            item.classList.toggle("correct", isCorrect);
-            item.classList.toggle("incorrect", !isCorrect);
-          }
-        });
-      });
-    });
-
-    // Handle submit button
-    if (submitBtn) {
-      submitBtn.addEventListener("click", () => {
-        let correct = 0;
-        let answered = 0;
-
-        quizItems.forEach((item) => {
-          const answer = item.dataset.answer;
-          const selected = item.querySelector("input[type='radio']:checked");
-
-          if (selected) {
-            answered += 1;
-            if (selected.value === answer) {
-              correct += 1;
-            }
-          }
-        });
-
-        scoreValue.textContent = correct;
-        scoreDisplay.removeAttribute("hidden");
-        announceToScreenReader(`Quiz submitted. Your score is ${correct} out of ${quizItems.length}`);
-      });
-    }
-  }
-
-  // ============================================================================
   // INTERSECTION OBSERVER FOR ANIMATIONS
   // ============================================================================
   
@@ -379,7 +319,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initA11yPanel();
   initBackgroundsAndAudio();
-  initQuiz();
   initObserver();
   initScroll();
   initNavigation();
