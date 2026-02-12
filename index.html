@@ -419,6 +419,43 @@
       
       console.log('Applied inline styles to', items.length, 'quiz items');
       
+      // Debug: Log the computed height and overflow
+      setTimeout(() => {
+        const firstItem = items[0];
+        if (firstItem) {
+          const rect = firstItem.getBoundingClientRect();
+          const computed = window.getComputedStyle(firstItem);
+          console.log('First quiz item:', {
+            display: computed.display,
+            opacity: computed.opacity,
+            visibility: computed.visibility,
+            height: computed.height,
+            width: computed.width,
+            position: rect,
+            offsetHeight: firstItem.offsetHeight,
+            scrollHeight: firstItem.scrollHeight
+          });
+          
+          const question = firstItem.querySelector('.quiz-question');
+          if (question) {
+            const qRect = question.getBoundingClientRect();
+            const qComputed = window.getComputedStyle(question);
+            console.log('First question:', {
+              display: qComputed.display,
+              color: qComputed.color,
+              fontSize: qComputed.fontSize,
+              text: question.textContent.substring(0, 50),
+              position: qRect
+            });
+          }
+        }
+        
+        if (quiz) {
+          const qRect = quiz.getBoundingClientRect();
+          console.log('Quiz container position:', qRect);
+        }
+      }, 500);
+      
       // Ensure other sections' content is visible (not just knowledge-check)
       document.querySelectorAll('.story-section:not(#knowledge-check) .content').forEach(content => {
         if (!content.classList.contains('visible')) {
