@@ -643,13 +643,74 @@ body.light-mode .quiz-item {
 /* KNOWLEDGE CHECK SPECIFIC */
 /* ========================================================================== */
 
+/* DEBUG: Make knowledge check VERY visible */
+#knowledge-check {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Force everything in knowledge-check to be visible */
+#knowledge-check,
+#knowledge-check .content,
+#knowledge-check .content-text,
+#knowledge-check .quiz,
+#knowledge-check .quiz-item,
+#knowledge-check .quiz-question,
+#knowledge-check .quiz-options,
+#knowledge-check .quiz-summary,
+#knowledge-check .quiz-feedback {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 #knowledge-check .content {
   flex-direction: column;
+  display: flex !important;
+  background: rgba(30, 30, 50, 0.95) !important;
+  border: 3px solid var(--accent) !important;
 }
 
 #knowledge-check .content-text {
   width: 100%;
   max-width: none;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#knowledge-check .quiz {
+  display: grid !important;
+  background: rgba(50, 50, 70, 0.3) !important;
+  padding: 1.5rem !important;
+  border: 2px dashed var(--accent-light) !important;
+}
+
+#knowledge-check .quiz-item {
+  display: block !important;
+  background: rgba(100, 100, 120, 0.2) !important;
+  border: 1px solid var(--accent) !important;
+  margin-bottom: 1rem !important;
+  padding: 1.5rem !important;
+}
+
+#knowledge-check .quiz-question {
+  color: var(--text-primary) !important;
+  font-size: 1.1rem !important;
+  display: block !important;
+}
+
+#knowledge-check .quiz-options {
+  display: grid !important;
+}
+
+#knowledge-check .quiz-options label {
+  display: flex !important;
+  color: var(--text-primary) !important;
+}
+
+#knowledge-check .quiz-options span {
+  color: var(--text-primary) !important;
+  display: inline !important;
 }
 
 /* ========================================================================== */
