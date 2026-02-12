@@ -123,9 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     DOM.sections.forEach((section) => {
-      // Add listen button (skip knowledge-check)
-      if (section.id === "knowledge-check") return;
-
       const contentText = section.querySelector(".content-text");
       if (!contentText) return;
 
@@ -170,9 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================================================
-  // QUIZ LOGIC (Works with pre-rendered HTML)
-  // ============================================================================
-  
+  // INTERSECTION OBSERVER FOR ANIMATIONS
   // ============================================================================
   
   function initObserver() {
