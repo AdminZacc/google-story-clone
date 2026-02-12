@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
 
@@ -364,72 +364,56 @@
   </main>
 
   <script>
-    // Immediate quiz visibility fix - runs before DOM is fully loaded
-    (function() {
-      const styleEl = document.createElement('style');
-      styleEl.textContent = `
-        #knowledge-check,
-        #knowledge-check *,
-        #knowledge-check .quiz-item,
-        #knowledge-check .quiz-question,
-        #knowledge-check .quiz-options,
-        #knowledge-check .quiz-options label,
-        #knowledge-check .quiz-options span,
-        #knowledge-check .quiz-options input {
-          display: revert !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-        }
-        #knowledge-check { display: flex !important; }
-        #knowledge-check .content { display: block !important; }
-        #knowledge-check .quiz { display: block !important; }
-        #knowledge-check .quiz-item { display: block !important; }
-        #knowledge-check .quiz-question { display: block !important; }
-        #knowledge-check .quiz-options { display: block !important; }
-        #knowledge-check .quiz-options label { display: flex !important; }
-        #knowledge-check .quiz-options span { display: inline !important; }
-        #knowledge-check .quiz-options input { display: inline-block !important; }
-      `;
-      document.head.appendChild(styleEl);
-      console.log('Quiz visibility styles injected');
+    // Force quiz visibility with aggressive inline styles
+    window.addEventListener('DOMContentLoaded', () => {
+      const section = document.getElementById('knowledge-check');
+      const quiz = document.querySelector('.quiz');
+      const items = document.querySelectorAll('.quiz-item');
       
-      // Debug computed styles when DOM is ready
-      window.addEventListener('DOMContentLoaded', () => {
-        const quiz = document.querySelector('.quiz');
-        const firstItem = document.querySelector('.quiz-item');
-        const firstQuestion = document.querySelector('.quiz-question');
+      if (section) {
+        section.style.cssText = 'min-height: 100vh; background: #1a1d27; padding: 4rem 2rem; display: flex !important; align-items: center; justify-content: center; opacity: 1 !important; visibility: visible !important;';
+      }
+      
+      const content = document.querySelector('#knowledge-check .content');
+      if (content) {
+        content.style.cssText = 'display: block !important; opacity: 1 !important; visibility: visible !important; max-width: 900px; background: #2a2d37; padding: 3rem; border-radius: 16px; border: 2px solid #d8b25e;';
+      }
+      
+      if (quiz) {
+        quiz.style.cssText = 'display: block !important; width: 100%; opacity: 1 !important; visibility: visible !important;';
+      }
+      
+      items.forEach(item => {
+        item.style.cssText = 'display: block !important; background: #35384a; border: 1px solid #4a4d5a; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; opacity: 1 !important; visibility: visible !important;';
         
-        if (quiz && firstItem && firstQuestion) {
-          const quizStyles = window.getComputedStyle(quiz);
-          const itemStyles = window.getComputedStyle(firstItem);
-          const questionStyles = window.getComputedStyle(firstQuestion);
+        const question = item.querySelector('.quiz-question');
+        if (question) {
+          question.style.cssText = 'display: block !important; color: #ffffff; font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; opacity: 1 !important; visibility: visible !important;';
+        }
+        
+        const options = item.querySelector('.quiz-options');
+        if (options) {
+          options.style.cssText = 'display: block !important; opacity: 1 !important; visibility: visible !important;';
           
-          console.log('Quiz computed styles:', {
-            display: quizStyles.display,
-            opacity: quizStyles.opacity,
-            visibility: quizStyles.visibility,
-            height: quizStyles.height,
-            overflow: quizStyles.overflow
-          });
-          
-          console.log('First item computed styles:', {
-            display: itemStyles.display,
-            opacity: itemStyles.opacity,
-            visibility: itemStyles.visibility,
-            height: itemStyles.height,
-            color: itemStyles.color
-          });
-          
-          console.log('First question computed styles:', {
-            display: questionStyles.display,
-            opacity: questionStyles.opacity,
-            visibility: questionStyles.visibility,
-            fontSize: questionStyles.fontSize,
-            color: questionStyles.color
+          const labels = options.querySelectorAll('label');
+          labels.forEach(label => {
+            label.style.cssText = 'display: flex !important; align-items: center; gap: 1rem; padding: 1rem; margin-bottom: 0.75rem; background: #2a2d37; border: 1px solid #4a4d5a; border-radius: 8px; cursor: pointer; opacity: 1 !important; visibility: visible !important;';
+            
+            const input = label.querySelector('input');
+            if (input) {
+              input.style.cssText = 'width: 20px; height: 20px; margin: 0; cursor: pointer; accent-color: #d8b25e; display: inline-block !important; opacity: 1 !important; visibility: visible !important;';
+            }
+            
+            const span = label.querySelector('span');
+            if (span) {
+              span.style.cssText = 'color: #e9edf5; font-size: 1rem; flex: 1; display: inline !important; opacity: 1 !important; visibility: visible !important;';
+            }
           });
         }
       });
-    })();
+      
+      console.log('Applied inline styles to', items.length, 'quiz items');
+    });
   </script>
   <script src="script.js?v=3"></script>
 </body>
