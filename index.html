@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
 
@@ -379,6 +379,11 @@
         content.style.cssText = 'display: block !important; opacity: 1 !important; visibility: visible !important; max-width: 900px; background: #2a2d37; padding: 3rem; border-radius: 16px; border: 2px solid #d8b25e;';
       }
       
+      const contentText = document.querySelector('#knowledge-check .content-text');
+      if (contentText) {
+        contentText.style.cssText = 'display: block !important; opacity: 1 !important; visibility: visible !important;';
+      }
+      
       if (quiz) {
         quiz.style.cssText = 'display: block !important; width: 100%; opacity: 1 !important; visibility: visible !important;';
       }
@@ -413,8 +418,24 @@
       });
       
       console.log('Applied inline styles to', items.length, 'quiz items');
+      
+      // Ensure other sections' content is visible (not just knowledge-check)
+      document.querySelectorAll('.story-section:not(#knowledge-check) .content').forEach(content => {
+        if (!content.classList.contains('visible')) {
+          content.classList.add('visible');
+        }
+      });
+      
+      // Ensure listen buttons are visible
+      setTimeout(() => {
+        document.querySelectorAll('.audio-btn').forEach(btn => {
+          if (btn.style.display === 'none' || btn.style.visibility === 'hidden') {
+            btn.style.cssText = '';
+          }
+        });
+      }, 100);
     });
   </script>
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
