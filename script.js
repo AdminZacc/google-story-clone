@@ -13,15 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     nav: document.querySelector(".nav"),
     story: document.getElementById("story"),
     sections: Array.from(document.querySelectorAll(".story-section[id]")),
-    contentBlocks: Array.from(document.querySelectorAll(".content")),
-    quizContainer: document.querySelector(".quiz"),
-    quizItems: Array.from(document.querySelectorAll(".quiz-item"))
+    contentBlocks: Array.from(document.querySelectorAll(".content"))
   };
-
-  // Debug logging
-  console.log("Quiz container found:", !!DOM.quizContainer);
-  console.log("Number of quiz items found:", DOM.quizItems.length);
-  console.log("Quiz items:", DOM.quizItems);
 
   const config = {
     reduceMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -180,50 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // QUIZ LOGIC (Works with pre-rendered HTML)
   // ============================================================================
   
-  function initQuiz() {
-    if (!DOM.quizContainer || !DOM.quizItems.length) {
-      console.log("Quiz not found - container:", !!DOM.quizContainer, "items:", DOM.quizItems.length);
-      return;
-    }
-
-    console.log("Quiz initialized with", DOM.quizItems.length, "questions");
-
-    const scoreSummary = DOM.quizContainer.querySelector(".quiz-summary");
-    const totalQuestions = DOM.quizItems.length;
-
-    const updateScore = () => {
-      let correct = 0;
-      let answered = 0;
-      DOM.quizItems.forEach((item) => {
-        const answer = item.dataset.answer;
-        const selected = item.querySelector("input[type='radio']:checked");
-        if (selected && selected.value === answer) correct += 1;
-        if (selected) answered += 1;
-      });
-      scoreSummary.textContent = `Score: ${correct} / ${totalQuestions} · Answered: ${answered} / ${totalQuestions}`;
-    };
-
-    DOM.quizItems.forEach((item) => {
-      const answer = item.dataset.answer;
-      const reminder = item.dataset.reminder;
-      const feedback = item.querySelector(".quiz-feedback");
-      const inputs = item.querySelectorAll("input[type='radio']");
-
-      inputs.forEach((input) => {
-        input.addEventListener("change", () => {
-          const isCorrect = input.value === answer;
-          if (feedback) {
-            feedback.innerHTML = `${isCorrect ? "✓ Correct" : "✗ Not quite"}. ` +
-              `<strong>Answer:</strong> ${answer}. ${reminder}`;
-          }
-          updateScore();
-        });
-      });
-    });
-  }
-
-  // ============================================================================
-  // INTERSECTION OBSERVER FOR ANIMATIONS
   // ============================================================================
   
   function initObserver() {
@@ -375,7 +324,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initA11yPanel();
   initBackgroundsAndAudio();
-  initQuiz();
   initObserver();
   initScroll();
   initNavigation();
