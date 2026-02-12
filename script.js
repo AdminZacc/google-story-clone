@@ -18,6 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     quizItems: Array.from(document.querySelectorAll(".quiz-item"))
   };
 
+  // Debug logging
+  console.log("Quiz container found:", !!DOM.quizContainer);
+  console.log("Number of quiz items found:", DOM.quizItems.length);
+  console.log("Quiz items:", DOM.quizItems);
+
   const config = {
     reduceMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     observerThreshold: 0.3,

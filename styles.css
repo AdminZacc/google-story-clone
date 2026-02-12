@@ -652,16 +652,30 @@ body.light-mode .quiz-item {
 
 /* Force everything in knowledge-check to be visible */
 #knowledge-check,
+#knowledge-check *,
 #knowledge-check .content,
+#knowledge-check .content *,
 #knowledge-check .content-text,
+#knowledge-check .content-text *,
 #knowledge-check .quiz,
+#knowledge-check .quiz *,
 #knowledge-check .quiz-item,
+#knowledge-check .quiz-item *,
 #knowledge-check .quiz-question,
 #knowledge-check .quiz-options,
+#knowledge-check .quiz-options *,
 #knowledge-check .quiz-summary,
-#knowledge-check .quiz-feedback {
+#knowledge-check .quiz-feedback,
+#knowledge-check p,
+#knowledge-check label,
+#knowledge-check span,
+#knowledge-check input {
   opacity: 1 !important;
   visibility: visible !important;
+  display: revert !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 #knowledge-check .content {
@@ -697,20 +711,37 @@ body.light-mode .quiz-item {
   color: var(--text-primary) !important;
   font-size: 1.1rem !important;
   display: block !important;
+  margin-bottom: 1rem !important;
+  font-weight: 600 !important;
 }
 
 #knowledge-check .quiz-options {
   display: grid !important;
+  gap: 0.75rem !important;
 }
 
 #knowledge-check .quiz-options label {
   display: flex !important;
   color: var(--text-primary) !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0.75rem !important;
+  background: rgba(216, 178, 94, 0.05) !important;
+  border: 1px solid rgba(216, 178, 94, 0.15) !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
 }
 
 #knowledge-check .quiz-options span {
   color: var(--text-primary) !important;
   display: inline !important;
+  flex: 1 !important;
+}
+
+#knowledge-check .quiz-options input[type="radio"] {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 
 /* ========================================================================== */
